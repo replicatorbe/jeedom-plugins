@@ -1,0 +1,381 @@
+<div align="center">
+
+# 🏠 Plugins Jeedom — sMug
+
+**Onze plugins libres pour Jeedom, écrits en Belgique, sans dépendance à installer.**
+
+Caméras, portier, solaire, MQTT, météo, poubelles, trains, robot aspirateur,
+éclairage, simulation de présence et assistant vocal — chacun dans son dépôt,
+tous rassemblés ici.
+
+[![Plugins](https://img.shields.io/badge/plugins-11-2f81f7?style=for-the-badge)](#-vue-densemble)
+[![Jeedom](https://img.shields.io/badge/Jeedom-4.4%2B-3ba55d?style=for-the-badge)](https://jeedom.com)
+[![PHP](https://img.shields.io/badge/PHP-natif-777bb4?style=for-the-badge&logo=php&logoColor=white)](#-un-socle-commun)
+[![Licence](https://img.shields.io/badge/licence-AGPL--3.0-e8710a?style=for-the-badge)](LICENSE)
+[![Made in](https://img.shields.io/badge/made%20in-Belgique-fdda24?style=for-the-badge)](#)
+
+</div>
+
+---
+
+## 📖 Ce dépôt
+
+Ce dépôt ne contient aucun code : c'est la **porte d'entrée** vers les plugins
+Jeedom publiés sous le compte [`replicatorbe`](https://github.com/replicatorbe).
+Chaque plugin vit dans son propre dépôt, avec sa documentation, son changelog et
+ses tests. Vous trouverez ici de quoi savoir lequel vous intéresse, et pourquoi.
+
+Un fil conducteur : **résoudre un vrai problème de la maison sans écrire de
+scénario**, et ne rien demander de plus que Jeedom — pas de paquet à installer,
+pas de service tiers imposé, pas de cloud là où le réseau local suffit.
+
+Et un second, revendiqué : **combler ce qui manque aux Belges dans Jeedom**.
+Trois plugins — [Météo Belgique IRM](#-la-belgique-au-quotidien),
+[Hygea](#-la-belgique-au-quotidien) et [SNCB/NMBS](#-la-belgique-au-quotidien) —
+n'existent que pour ça : les services belges sont rarement couverts par les
+plugins existants, quand ils ne sont pas simplement absents.
+
+---
+
+## 🧭 Vue d'ensemble
+
+| | Plugin | En une phrase | Version | Dépôt |
+|:---:|:---|:---|:---:|:---:|
+| <img src="assets/icons/dahua.png" width="28"> | **Dahua NVR** | Les événements de vos caméras Dahua, en temps réel, typés et archivés | `0.6` | [↗](https://github.com/replicatorbe/jeedom-plugin-dahua) |
+| <img src="assets/icons/dahuavtobe.png" width="28"> | **Dahua VTO** | On sonne, Jeedom le sait dans la seconde et garde le visage | `0.1` | [↗](https://github.com/replicatorbe/jeedom-plugin-dahuavtobe) |
+| <img src="assets/icons/simulationpresenceintelligentbe.png" width="28"> | **Simulation de présence** | La maison rejoue vos vraies soirées pendant que vous êtes ailleurs | `1.0` | [↗](https://github.com/replicatorbe/jeedom-plugin-simulationpresenceintelligentbe) |
+| <img src="assets/icons/solplanetbe.png" width="28"> | **Solplanet** | Votre production solaire en local, sans le cloud du fabricant | `0.2` | [↗](https://github.com/replicatorbe/jeedom-plugin-solplanetbe) |
+| <img src="assets/icons/mqttbe.png" width="28"> | **MQTT BE** | Donnez l'adresse du broker, vos Shelly arrivent seuls | `0.7` | [↗](https://github.com/replicatorbe/jeedom-plugin-mqttbe) |
+| <img src="assets/icons/lampesoirmatinbe.png" width="28"> | **Lampes Soir & Matin** | Les lampes s'allument le soir, s'éteignent le matin. Zéro scénario | `1.3` | [↗](https://github.com/replicatorbe/jeedom-plugin-lampesoirmatinbe) |
+| <img src="assets/icons/dreamebe.png" width="28"> | **Dreame** | Vos robots aspirateurs dans vos scénarios, sans passerelle | `0.1` | [↗](https://github.com/replicatorbe/jeedom-plugin-dreamebe) |
+| <img src="assets/icons/k2000be.png" width="28"> | **K2000** | Vous parlez à la maison ; elle comprend, agit et rend compte | `0.1` | [↗](https://github.com/replicatorbe/jeedom-plugin-k2000be) |
+| <img src="assets/icons/meteobelgiqueirm.png" width="28"> | 🇧🇪 **Météo Belgique IRM** | La météo officielle belge, sans compte ni clé | `0.1` | [↗](https://github.com/replicatorbe/jeedom-plugin-meteobelgiqueirm) |
+| <img src="assets/icons/hygeabe.png" width="28"> | 🇧🇪 **Hygea** | Le calendrier des poubelles, avec le rappel la veille au soir | `0.6` | [↗](https://github.com/replicatorbe/jeedom-plugin-hygeabe) |
+| <img src="assets/icons/sncbnmbs.png" width="28"> | 🇧🇪 **SNCB/NMBS** | Est-ce que je pars maintenant, et sur quelle voie ? | `1.1` | [↗](https://github.com/replicatorbe/jeedom-plugin-sncbnmbs) |
+
+---
+
+## 🛡️ Sécurité et surveillance
+
+### <img src="assets/icons/dahua.png" width="32" align="top"> Dahua NVR
+
+> *Vos caméras Dahua parlent à Jeedom, en temps réel, sans scénario bricolé.*
+
+Le plugin ouvre une connexion permanente vers un NVR ou une caméra Dahua et
+transforme chaque événement du matériel en **commande Jeedom typée** — mouvement,
+humain, véhicule, ligne franchie, perte vidéo — au lieu d'une chaîne à découper
+dans un scénario. Un équipement est créé par canal, avec le nom déjà défini dans
+le NVR. Les *règles de détection croisée* corrèlent plusieurs détections dans une
+fenêtre de temps pour écarter les faux positifs, et chaque déclenchement archive
+les images des caméras concernées, à la détection et à l'instant de l'alerte.
+
+- Découverte automatique des caméras, une quinzaine de types de détection
+- Deux transports au choix : **DHIP natif** ou long-polling **CGI**, bascule auto après deux échecs
+- Captures d'images servies par un passe-plat authentifié, avec rotation et rétention à deux étages
+- Règles croisées avec modèles préremplis : double détection, confirmation humaine, intrusion corroborée, rôdeur
+- Contrôle PTZ par preset, sorties d'alarme, lumière blanche et sirène
+- Page « Historique des alertes » consultable sans profil administrateur
+
+**Il faut** un NVR ou une caméra Dahua sur le réseau local, et un compte dessus.
+Démon PHP, aucune dépendance à installer.
+📦 [`jeedom-plugin-dahua`](https://github.com/replicatorbe/jeedom-plugin-dahua)
+
+### <img src="assets/icons/dahuavtobe.png" width="32" align="top"> Dahua VTO
+
+> *On sonne, Jeedom le sait dans la seconde et garde le visage.*
+
+Le plugin se connecte **directement** au portier vidéo Dahua VTO, sans
+enregistreur intermédiaire ni cloud constructeur. Il remonte les appels de
+sonnette, les fins d'appel sans réponse, les ouvertures de gâche et les alarmes
+locales ; à chaque sonnerie, le démon photographie le visiteur avant même qu'un
+scénario ait eu le temps de se réveiller.
+
+- Commande `sonnerie` binaire qui retombe seule, pensée comme déclencheur
+- Photo du visiteur à la sonnerie et à chaque ouverture (badge, code), datée sur le dashboard
+- Rattrapage des sonneries manquées par relecture du journal d'appels du portier
+- Ouverture de gâche possible, mais doublement verrouillée (commande invisible + refus tant que la configuration ne l'autorise pas)
+- Onglet Diagnostic montrant les événements bruts, pour identifier les codes d'un modèle particulier
+- Réglages pris à chaud, sans redémarrage du démon
+
+**Il faut** un portier Dahua VTO joignable en local (ports 80 et 5000).
+Mis au point sur un DHI-VTO2211G-WP.
+📦 [`jeedom-plugin-dahuavtobe`](https://github.com/replicatorbe/jeedom-plugin-dahuavtobe)
+
+### <img src="assets/icons/simulationpresenceintelligentbe.png" width="32" align="top"> Simulation de présence intelligente
+
+> *La maison rejoue vos vraies soirées pendant que vous êtes ailleurs.*
+
+Plutôt que de faire clignoter des lampes au hasard, le plugin **lit l'historique
+Jeedom** de vos lampes et prises, en tire par jour de semaine les heures
+auxquelles chacune s'allume et s'éteint, puis rejoue cette journée avec assez de
+hasard pour ne jamais se répéter. Les habitudes apprises suivent le soleil : une
+soirée apprise en septembre est replacée sur le coucher de décembre. Une lampe
+sans passé reçoit une soirée inventée, pour que le plugin serve dès le premier jour.
+
+- Apprentissage par tranches d'un quart d'heure et par jour de semaine
+- Départ à la main ou sur condition décrivant la maison (alarme armée, personne présente)
+- Garde-fous : fenêtre horaire solaire, nombre maximum de lampes allumées, durées min/max, retour à l'état initial
+- Aperçu d'aujourd'hui, demain et après-demain, lampe par lampe, en barres de 24 h
+- Bouton « Répéter la soirée en deux minutes » pour voir le plan du jour pour de vrai
+- Les journées pilotées par le plugin sont exclues de l'apprentissage — il n'apprend pas de lui-même
+
+**Il faut** des lampes déjà pilotables par un autre plugin, et la position de
+l'installation renseignée. Rien d'autre.
+📦 [`jeedom-plugin-simulationpresenceintelligentbe`](https://github.com/replicatorbe/jeedom-plugin-simulationpresenceintelligentbe)
+
+---
+
+## ⚡ Énergie et protocoles
+
+### <img src="assets/icons/solplanetbe.png" width="32" align="top"> Solplanet
+
+> *Votre production solaire dans Jeedom, en local, sans le cloud du fabricant.*
+
+Le plugin relève les onduleurs photovoltaïques **Solplanet / VoltX / AiSWEI**
+équipés de leur clé de communication, en interrogeant le petit serveur HTTP
+qu'elle expose sur le réseau local : aucun compte, aucune ouverture de port. Il
+découvre ce qui répond derrière une adresse IP — onduleur, compteur
+bidirectionnel, batterie — et crée un équipement par appareil physique.
+
+- Découverte par saisie d'une seule adresse IP, plusieurs onduleurs gérés
+- Onduleur : puissance, énergie du jour et totale, tension/courant par phase et par chaîne MPPT, température, code d'erreur en clair
+- Compteur : puissance réseau signée, index de soutirage et d'injection
+- Batterie : SOC, SOH, puissance, énergies chargées/déchargées, réseau secouru (EPS)
+- Tuile unique par équipement, avec jauge sur la puissance nominale et détail par chaîne
+- Gestion explicite de la nuit : les **index d'énergie ne sont jamais touchés**, backoff après trois échecs, journal silencieux
+
+**Il faut** une clé de communication AiSWEI sur le même réseau que Jeedom.
+Lecture seule : aucun pilotage de la batterie dans cette version.
+📦 [`jeedom-plugin-solplanetbe`](https://github.com/replicatorbe/jeedom-plugin-solplanetbe)
+
+### <img src="assets/icons/mqttbe.png" width="32" align="top"> MQTT BE
+
+> *Donnez l'adresse du broker, vos Shelly arrivent seuls dans Jeedom.*
+
+Le plugin relie Jeedom à un broker MQTT et **déduit les équipements de ce qui
+circule réellement** sur le broker : pas de topic à recopier, pas de modèle à
+écrire. Le principe est d'interroger l'appareil plutôt que de reconnaître son
+modèle — un Shelly 1 avec deux sondes externes est découvert avec ses deux
+sondes, là où un catalogue aurait livré la même fiche pour les deux.
+
+- Shelly **Gen1 à Gen4** découverts et créés automatiquement (22 appareils → 198 commandes sans saisie)
+- Gen2+ interrogés par RPC porté sur MQTT, sans rien régler sur l'appareil et sans réveiller les capteurs sur pile
+- Passerelles **OpenMQTTGateway** et balises Bluetooth : température, humidité, pression, pile, RSSI par passerelle — et quelle passerelle entend le mieux
+- File d'adoption avec refus persistants : reconnaître sans créer, appareil par appareil
+- Création manuelle complète pour n'importe quel appareil publiant sur MQTT
+- Vos retouches (nom, unité, affichage, historisation) survivent aux redécouvertes
+
+**Il faut** un broker MQTT joignable. Jeedom **OS 12** minimum pour ce plugin.
+Les bibliothèques MQTT sont figées dans le dépôt : ni composer, ni pip.
+📦 [`jeedom-plugin-mqttbe`](https://github.com/replicatorbe/jeedom-plugin-mqttbe)
+
+---
+
+## 💡 Confort et automatisation
+
+### <img src="assets/icons/lampesoirmatinbe.png" width="32" align="top"> Lampes Soir & Matin
+
+> *Les lampes s'allument le soir, s'éteignent le matin. Zéro scénario.*
+
+On regroupe des lampes et on leur donne deux rendez-vous par jour. Les lampes se
+choisissent dans un sélecteur qui parcourt l'installation, les range par pièce et
+permet de **les allumer pour de vrai** afin de reconnaître laquelle s'appelle
+« Module 3 ». Chaque moment se règle à heure fixe ou par rapport au lever/coucher
+du soleil. Le plugin ne pilote aucun matériel : il commande les lampes créées par
+vos autres plugins — Zigbee, Z-Wave, Hue, MQTT, prises Wi-Fi, modules anciens.
+
+- Déclenchement à heure fixe ou à X minutes avant/après le soleil
+- Garde-fous « jamais avant 17:30 », « jamais après 08:00 » qui **ramènent** l'heure au lieu d'annuler
+- Décalage aléatoire de ± n minutes tiré une fois par jour : simulation de présence en un champ
+- Aperçu des trois prochaines occurrences, calculé par le code qui décidera vraiment
+- Suspension d'un groupe sans le désactiver (mode vacances), pilotable en scénario
+- Rattrapage des moments manqués après une coupure, joué une seule fois par jour
+
+**Il faut** la latitude/longitude de l'installation. Aucune API, aucun compte,
+aucun appel réseau.
+📦 [`jeedom-plugin-lampesoirmatinbe`](https://github.com/replicatorbe/jeedom-plugin-lampesoirmatinbe)
+
+### <img src="assets/icons/dreamebe.png" width="32" align="top"> Dreame
+
+> *Vos robots aspirateurs dans vos scénarios, sans démon ni passerelle.*
+
+Le plugin pilote les aspirateurs robots **Dreame** récents depuis Jeedom via le
+cloud DreameHome. Un compte est renseigné une fois, et chaque robot — y compris
+ceux partagés par un autre membre du foyer — devient un équipement indépendant
+avec son état, sa batterie, ses erreurs, ses consommables, ses ordres de
+nettoyage et sa carte.
+
+- Sondage des capacités : le plugin interroge le robot et ne crée que les commandes auxquelles il répond
+- Ordres : démarrer, pause, reprendre, arrêter, station, localiser, vider le bac, laver et sécher la serpillière
+- Nettoyage **par pièce** (`Cuisine | 2 | 3` : deux passages, mode 3) et par zone en millimètres
+- Réglages selon la machine : aspiration, humidité, niveau d'eau, Ne pas déranger, tapis, détergent automatique
+- Suivi fin : avertissements de la station distingués des pannes du robot, progression du nettoyage, usure des consommables
+- Carte décodée et rendue en PNG, servie aux seuls utilisateurs authentifiés
+
+**Il faut** un compte DreameHome et un robot récent — cible : **L40 Ultra** et
+variantes. Les anciens modèles rattachés à Mi Home ne sont pas gérés.
+📦 [`jeedom-plugin-dreamebe`](https://github.com/replicatorbe/jeedom-plugin-dreamebe)
+
+### <img src="assets/icons/k2000be.png" width="32" align="top"> K2000
+
+> *Dites « je vais me coucher » ; la maison comprend, agit, et vous rend compte.*
+
+Un assistant en langage naturel branché sur une API de modèle de langage et son
+mécanisme d'appel d'outils. On lui parle en français ; il consulte l'état des
+pièces, décide, **exécute uniquement les commandes qu'un administrateur lui a
+explicitement autorisées**, relit l'état pour vérifier, puis raconte ce qu'il a
+fait. Le modèle n'a jamais accès à l'installation : il ne fait que demander, le
+plugin exécute, refuse ou réclame une confirmation humaine.
+
+- Trois politiques par commande : interdite, autorisée, autorisée avec confirmation
+- Trois modes globaux : `lecture`, `simulation` (tout est joué et journalisé, rien n'est envoyé) et `actions` — **`simulation` est le défaut livré**
+- Confirmation humaine des actions sensibles (serrure, portail, alarme, sirène), caduque au bout de cinq minutes
+- Utilisable depuis la page du plugin, un widget de dashboard ou un scénario
+- Journal des demandes avec coût cumulé et plafond de demandes par jour appliqué **avant** tout appel réseau
+- Page Santé qui signale les commandes autorisées capables d'ouvrir ou de désarmer sans demander
+
+**Il faut** une clé d'API — chaque demande est facturée par le fournisseur du
+modèle.
+📦 [`jeedom-plugin-k2000be`](https://github.com/replicatorbe/jeedom-plugin-k2000be)
+
+---
+
+## 🇧🇪 La Belgique au quotidien
+
+**Ces trois plugins sont spécifiquement belges, et c'est tout leur objet.**
+L'écosystème Jeedom est riche, mais il s'arrête souvent à la frontière : la météo
+vient d'un service français ou mondial qui ignore les avertissements de l'IRM,
+les calendriers de déchets ne connaissent pas les intercommunales wallonnes, et
+aucun plugin ne suit les trains de la SNCB/NMBS. Ces trois-là comblent ce trou —
+sources officielles belges, communes belges, gares belges, en français comme en
+néerlandais, sans compte ni clé d'API.
+
+### <img src="assets/icons/meteobelgiqueirm.png" width="32" align="top"> Météo Belgique IRM
+
+> *La météo officielle belge dans Jeedom, sans compte ni clé.*
+
+Les données de l'**Institut Royal Météorologique** pour une commune donnée :
+observations du moment, prévisions à sept jours, prévisions horaires H+1 à H+3,
+pluie à courte échéance et avertissements officiels jaune/orange/rouge. Un
+équipement = une commune, choisie parmi les **565 communes belges** livrées avec
+le plugin, en français comme en néerlandais.
+
+- Température, pression, vent, rafales, direction, indice UV, lever et coucher
+- Bulletin rédigé de l'IRM pour aujourd'hui et demain
+- Pluie chiffrée : maintenant, prochaine heure, bientôt
+- Distinction stricte entre vigilance **en cours** et vigilance **annoncée**
+- Notifications automatiques sans scénario : seuil, actions au choix, message à jetons, règle anti-répétition
+- Tuile unique avec bande heure par heure, et mise en défaut au-delà de 45 minutes sans donnée
+
+Fermer les volets sur vigilance orange, rentrer le linge avant la pluie : ce sont
+des commandes info, elles déclenchent vos scénarios. **Spécifique Belgique** : la
+source est l'IRM/KMI lui-même, pas un agrégateur mondial qui ignore ses
+avertissements.
+📦 [`jeedom-plugin-meteobelgiqueirm`](https://github.com/replicatorbe/jeedom-plugin-meteobelgiqueirm)
+
+### <img src="assets/icons/hygeabe.png" width="32" align="top"> Hygea
+
+> *Votre calendrier de poubelles belge, avec le rappel la veille au soir.*
+
+Le calendrier de collecte publié par **Recycle!** pour une adresse belge,
+converti en commandes Jeedom. On saisit code postal, localité, rue et numéro — la
+localité et la rue se choisissent dans les listes renvoyées par le service — et le
+plugin sait ensuite quand passe la collecte et quelles fractions sortir. Malgré
+son nom, **il couvre toutes les intercommunales** publiant sur ce service (HYGEA,
+TIBI…) et affiche l'opérateur réel de l'adresse.
+
+- Prochaine collecte, résumé, date, déchets concernés, jours restants, collecte aujourd'hui/demain
+- Option « commandes par fraction » : une date et un « demain » par déchet, saisonniers compris (sapins, encombrants, verre)
+- Onglet Rappels : plusieurs rappels par adresse, message à jetons `#dechets#`, `#jour#`, `#adresse#`…
+- Bouton « Tester » qui envoie le rappel pour de vrai, et ligne « Prochain envoi »
+- Rattrapage d'un rappel manqué jusqu'à deux heures après l'heure dite
+- Widget dédié : couleurs officielles des déchets, orange la veille, rouge le jour même
+
+Aucun compte, aucune clé. Le dernier calendrier connu survit aux pannes du
+service. **Spécifique Belgique** : adresses belges, fractions belges,
+intercommunales belges — rien de tout cela n'existe dans les plugins de
+collecte généralistes.
+📦 [`jeedom-plugin-hygeabe`](https://github.com/replicatorbe/jeedom-plugin-hygeabe)
+
+### <img src="assets/icons/sncbnmbs.png" width="32" align="top"> SNCB/NMBS
+
+> *Est-ce que je pars maintenant, et sur quelle voie ?*
+
+La surveillance des trains belges pour navetteurs, à partir des données ouvertes
+**iRail**. Un équipement représente un trajet : gare de départ, gare d'arrivée,
+créneau horaire, jours de la semaine. Le plugin liste les trains du créneau et
+contrôle leur état — retard, suppression, changement de voie, perturbation — et
+expose le tout en commandes info. Ce n'est pas un planificateur d'itinéraire : il
+ne cherche pas de chemin et ne vend pas de billet.
+
+- Prochain train : heure théorique et réelle, retard, quai, direction, durée, correspondances, compte à rebours, occupation
+- **Train de repli** exposé séparément, et proposé dans la notification
+- État global du trajet : trains retardés, supprimés, retard maximum, message de perturbation
+- Action Jeedom appelée automatiquement sur suppression, retard au-delà du seuil ou changement de voie, avec mémoire anti-répétition
+- Onglets Trains et Réseau, perturbations mutualisées entre trajets
+- Recherche de gares insensible aux accents, bouton « Inverser le trajet », créneaux de nuit gérés
+
+iRail est gratuit — le plugin s'interdit d'en abuser : appel à la minute
+seulement dans la fenêtre surveillée, une lecture par heure en dehors, aucune
+entre 1 h et 5 h. **Spécifique Belgique** : le réseau ferroviaire belge, ses
+gares et ses perturbations, là où Jeedom n'offrait rien pour le navetteur belge.
+📦 [`jeedom-plugin-sncbnmbs`](https://github.com/replicatorbe/jeedom-plugin-sncbnmbs)
+
+---
+
+## 📥 Installation
+
+Tous les plugins s'installent de la même manière, depuis Jeedom :
+
+> **Plugins → Gestion des plugins → Ajouter → Github**
+>
+> | Champ | Valeur |
+> |:---|:---|
+> | Utilisateur | `replicatorbe` |
+> | Dépôt | `jeedom-plugin-<id>` (par exemple `jeedom-plugin-hygeabe`) |
+> | Branche | `master` pour la version stable, `beta` pour la suivante |
+
+Puis **Activer** le plugin, et créer un équipement. Aucun paquet système, aucune
+dépendance à installer : les plugins qui ont besoin d'une bibliothèque
+l'embarquent.
+
+---
+
+## 🧱 Un socle commun
+
+Les onze plugins partagent les mêmes partis pris :
+
+| | |
+|:---|:---|
+| **PHP natif** | Aucune dépendance à installer : ni `pip`, ni `composer`, ni paquet système. Les trois plugins à démon (Dahua NVR, Dahua VTO, MQTT BE) ont un démon écrit **en PHP**. |
+| **Démon isolé du cœur** | Les démons ne chargent jamais `core.inc.php` : ils dialoguent avec Jeedom par HTTP authentifié. Une mise à jour du cœur ne peut pas les casser. |
+| **Le local d'abord** | Solplanet, Dahua et MQTT ne sortent pas du réseau. Le cloud n'est utilisé que là où le constructeur ne laisse pas le choix. |
+| **Sobriété réseau** | Cache, recul exponentiel après échec, fenêtres de surveillance : les services publics gratuits ne sont pas matraqués. |
+| **Tests hors ligne** | La logique métier est séparée de Jeedom et vérifiée par des jeux d'essai qui tournent sans box, sans base et sans matériel. |
+| **Documentation en français** | Chaque dépôt porte sa doc `docs/fr_FR/` et son changelog, consultables depuis Jeedom. |
+| **Rien n'est effacé en cas de panne** | Une source indisponible laisse la dernière valeur connue en place — le plugin ne ment pas par zéro. |
+
+---
+
+## 🤝 Contribuer
+
+Les remontées se font **dans le dépôt du plugin concerné**, via ses *Issues* :
+version de Jeedom, version du plugin, et le journal du plugin en niveau debug
+font gagner beaucoup de temps.
+
+Les plugins sont publiés sous licence **AGPL-3.0** : vous pouvez les lire, les
+modifier et les redistribuer, à condition de laisser les mêmes droits à ceux qui
+recevront votre version.
+
+---
+
+<div align="center">
+
+**sMug** — Jérôme Fafchamps
+[github.com/replicatorbe](https://github.com/replicatorbe) · [fafchamps.be](https://fafchamps.be)
+
+<sub>Les plugins sont des travaux indépendants, sans lien avec Jeedom SAS,
+Dahua, Solplanet, Dreame, la SNCB/NMBS, l'IRM/KMI ou Fost Plus. Les marques
+citées appartiennent à leurs propriétaires.</sub>
+
+</div>
