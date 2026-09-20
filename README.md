@@ -39,7 +39,7 @@ plugins existants, quand ils ne sont pas simplement absents.
 
 ## 🧭 Vue d'ensemble
 
-| | Plugin | En une phrase | Version | Dépôt |
+| | Plugin | En une phrase | Stable | Dépôt |
 |:---:|:---|:---|:---:|:---:|
 | <img src="assets/icons/dahua.png" width="28"> | **Dahua NVR** | Les événements de vos caméras Dahua, en temps réel, typés et archivés | `0.6` | [↗](https://github.com/replicatorbe/jeedom-plugin-dahua) |
 | <img src="assets/icons/dahuavtobe.png" width="28"> | **Dahua VTO** | On sonne, Jeedom le sait dans la seconde et garde le visage | `0.1` | [↗](https://github.com/replicatorbe/jeedom-plugin-dahuavtobe) |
@@ -50,7 +50,7 @@ plugins existants, quand ils ne sont pas simplement absents.
 | <img src="assets/icons/dreamebe.png" width="28"> | **Dreame** | Vos robots aspirateurs dans vos scénarios, sans passerelle | `0.1` | [↗](https://github.com/replicatorbe/jeedom-plugin-dreamebe) |
 | <img src="assets/icons/k2000be.png" width="28"> | **K2000** | Vous parlez à la maison ; elle comprend, agit et rend compte | `0.1` | [↗](https://github.com/replicatorbe/jeedom-plugin-k2000be) |
 | <img src="assets/icons/meteobelgiqueirm.png" width="28"> | 🇧🇪 **Météo Belgique IRM** | La météo officielle belge, sans compte ni clé | `0.1` | [↗](https://github.com/replicatorbe/jeedom-plugin-meteobelgiqueirm) |
-| <img src="assets/icons/hygeabe.png" width="28"> | 🇧🇪 **Hygea** | Le calendrier des poubelles, avec le rappel la veille au soir | `0.6` | [↗](https://github.com/replicatorbe/jeedom-plugin-hygeabe) |
+| <img src="assets/icons/hygeabe.png" width="28"> | 🇧🇪 **Hygea** | Le calendrier des poubelles, avec le rappel la veille au soir | `0.5` | [↗](https://github.com/replicatorbe/jeedom-plugin-hygeabe) |
 | <img src="assets/icons/sncbnmbs.png" width="28"> | 🇧🇪 **SNCB/NMBS** | Est-ce que je pars maintenant, et sur quelle voie ? | `1.1` | [↗](https://github.com/replicatorbe/jeedom-plugin-sncbnmbs) |
 
 ---
@@ -338,6 +338,11 @@ Tous les plugins s'installent de la même manière, depuis Jeedom :
 Puis **Activer** le plugin, et créer un équipement. Aucun paquet système, aucune
 dépendance à installer : les plugins qui ont besoin d'une bibliothèque
 l'embarquent.
+
+Chaque version publiée est **taguée** dans le dépôt du plugin (`v0.6`, `v1.1`…) :
+l'onglet *Tags* donne le code exact d'une version, à confronter à la ligne
+correspondante du changelog. La branche `beta` porte la version en préparation,
+qui peut être en avance d'un numéro sur `master`.
 
 ---
 
