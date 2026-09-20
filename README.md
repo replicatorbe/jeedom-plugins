@@ -48,7 +48,7 @@ plugins existants, quand ils ne sont pas simplement absents.
 | <img src="assets/icons/solplanetbe.png" width="28"> | **Solplanet** | Votre production solaire en local, sans le cloud du fabricant | `0.2` | [↗](https://github.com/replicatorbe/jeedom-plugin-solplanetbe) |
 | <img src="assets/icons/mqttbe.png" width="28"> | **MQTT BE** | Donnez l'adresse du broker, vos Shelly arrivent seuls | `0.7` | [↗](https://github.com/replicatorbe/jeedom-plugin-mqttbe) |
 | <img src="assets/icons/lampesoirmatinbe.png" width="28"> | **Lampes Soir & Matin** | Les lampes s'allument le soir, s'éteignent le matin. Zéro scénario | `1.3` | [↗](https://github.com/replicatorbe/jeedom-plugin-lampesoirmatinbe) |
-| <img src="assets/icons/voletautobe.png" width="28"> | **Volets Auto** | Les volets suivent le soleil et la température, pas une heure devinée | `1.1` | [↗](https://github.com/replicatorbe/jeedom-plugin-voletautobe) |
+| <img src="assets/icons/voletautobe.png" width="28"> | **Volets Auto** | Les volets suivent le soleil et la température, pas une heure devinée | `1.2` | [↗](https://github.com/replicatorbe/jeedom-plugin-voletautobe) |
 | <img src="assets/icons/dreamebe.png" width="28"> | **Dreame** | Vos robots aspirateurs dans vos scénarios, sans passerelle | `0.1` | [↗](https://github.com/replicatorbe/jeedom-plugin-dreamebe) |
 | <img src="assets/icons/k2000be.png" width="28"> | **K2000** | Vous parlez à la maison ; elle comprend, agit et rend compte | `0.1` | [↗](https://github.com/replicatorbe/jeedom-plugin-k2000be) |
 | <img src="assets/icons/meteobelgiqueirm.png" width="28"> | 🇧🇪 **Météo Belgique IRM** | La météo officielle belge, sans compte ni clé | `0.1` | [↗](https://github.com/replicatorbe/jeedom-plugin-meteobelgiqueirm) |
