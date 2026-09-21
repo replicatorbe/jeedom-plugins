@@ -2,14 +2,13 @@
 
 # 🏠 Plugins Jeedom — sMug
 
-**Douze plugins libres pour Jeedom, écrits en Belgique, sans dépendance à installer.**
+**Treize plugins libres pour Jeedom, écrits en Belgique, sans dépendance à installer.**
 
-Caméras, portier, solaire, MQTT, météo, poubelles, trains, robot aspirateur,
-éclairage, volets, simulation de présence et assistant vocal — chacun dans son
-dépôt,
-tous rassemblés ici.
+Un dashboard, des caméras, un portier, du solaire, MQTT, la météo, les poubelles,
+les trains, un robot aspirateur, l'éclairage, les volets, la simulation de
+présence et un assistant vocal — chacun dans son dépôt, tous rassemblés ici.
 
-[![Plugins](https://img.shields.io/badge/plugins-12-2f81f7?style=for-the-badge)](#-vue-densemble)
+[![Plugins](https://img.shields.io/badge/plugins-13-2f81f7?style=for-the-badge)](#-vue-densemble)
 [![Jeedom](https://img.shields.io/badge/Jeedom-4.4%2B-3ba55d?style=for-the-badge)](https://jeedom.com)
 [![PHP](https://img.shields.io/badge/PHP-natif-777bb4?style=for-the-badge&logo=php&logoColor=white)](#-un-socle-commun)
 [![Licence](https://img.shields.io/badge/licence-AGPL--3.0-e8710a?style=for-the-badge)](LICENSE)
@@ -42,6 +41,7 @@ plugins existants, quand ils ne sont pas simplement absents.
 
 | | Plugin | En une phrase | Stable | Dépôt |
 |:---:|:---|:---|:---:|:---:|
+| <img src="assets/icons/jeeglowbe.png" width="28"> | **jeeGlow** | Un second dashboard, moderne et tactile, sans toucher au premier | `0.1` | [↗](https://github.com/replicatorbe/jeedom-plugin-jeeglowbe) |
 | <img src="assets/icons/dahua.png" width="28"> | **Dahua NVR** | Les événements de vos caméras Dahua, en temps réel, typés et archivés | `0.6` | [↗](https://github.com/replicatorbe/jeedom-plugin-dahua) |
 | <img src="assets/icons/dahuavtobe.png" width="28"> | **Dahua VTO** | On sonne, Jeedom le sait dans la seconde et garde le visage | `0.1` | [↗](https://github.com/replicatorbe/jeedom-plugin-dahuavtobe) |
 | <img src="assets/icons/simulationpresenceintelligentbe.png" width="28"> | **Simulation de présence** | La maison rejoue vos vraies soirées pendant que vous êtes ailleurs | `1.0` | [↗](https://github.com/replicatorbe/jeedom-plugin-simulationpresenceintelligentbe) |
@@ -54,6 +54,32 @@ plugins existants, quand ils ne sont pas simplement absents.
 | <img src="assets/icons/meteobelgiqueirm.png" width="28"> | 🇧🇪 **Météo Belgique IRM** | La météo officielle belge, sans compte ni clé | `0.1` | [↗](https://github.com/replicatorbe/jeedom-plugin-meteobelgiqueirm) |
 | <img src="assets/icons/hygeabe.png" width="28"> | 🇧🇪 **Hygea** | Le calendrier des poubelles, avec le rappel la veille au soir | `0.5` | [↗](https://github.com/replicatorbe/jeedom-plugin-hygeabe) |
 | <img src="assets/icons/sncbnmbs.png" width="28"> | 🇧🇪 **SNCB/NMBS** | Est-ce que je pars maintenant, et sur quelle voie ? | `1.1` | [↗](https://github.com/replicatorbe/jeedom-plugin-sncbnmbs) |
+
+---
+
+## 🖥️ L'interface
+
+### <img src="assets/icons/jeeglowbe.png" width="32" align="top"> jeeGlow
+
+> *Un second dashboard, moderne et tactile, sans rien changer au premier.*
+
+Jeedom affiche des équipements ; on voudrait qu'il montre une maison. jeeGlow
+ajoute un **dashboard parallèle** — le dashboard d'origine, les vues et les
+designs restent en place — construit en relisant vos objets, vos équipements et
+vos commandes. Il est pensé pour l'écran mural autant que pour le téléphone.
+
+- Rangement **par fonction** — lumières, prises, volets, chauffage, sécurité, caméras, capteurs — déduit des types génériques du cœur, parce qu'un rangement par pièce reste vide de moitié tant que les objets ne sont pas remplis
+- Navigation par rail et sous-onglets, qui devient une barre en bas sur téléphone ; une vue **Accueil** dit ce qui tourne dans la maison
+- **Panneau de détail** par équipement : toutes les commandes, les courbes d'historique, et le rangement dans une pièce sans quitter le dashboard
+- **Le widget du plugin est affiché tel quel** quand son auteur en a écrit un : vignettes d'alerte caméra, plan d'un robot, bulletin météo
+- Les valeurs structurées ne sont plus recrachées en JSON : la carte montre le champ le plus lisible, le détail se déplie d'un appui
+- **Mode kiosque** : plus de menu ni de barre du haut, retenu par l'appareil, avec retour à l'accueil après inactivité et atténuation de nuit
+- Noms raccourcis automatiquement, et un nom à soi par équipement — **sans jamais renommer dans Jeedom**
+- Temps réel par le flux d'événements du cœur, droits appliqués équipement par équipement : un profil restreint ne reçoit même pas les boutons qu'il n'a pas le droit d'actionner
+
+**Il ne faut rien** : ni démon, ni dépendance, ni configuration. Le plugin ne
+crée aucun équipement et ne modifie rien — il lit.
+📦 [`jeedom-plugin-jeeglowbe`](https://github.com/replicatorbe/jeedom-plugin-jeeglowbe)
 
 ---
 
@@ -377,7 +403,7 @@ qui peut être en avance d'un numéro sur `master`.
 
 ## 🧱 Un socle commun
 
-Les douze plugins partagent les mêmes partis pris :
+Les treize plugins partagent les mêmes partis pris :
 
 | | |
 |:---|:---|
