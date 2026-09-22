@@ -47,7 +47,7 @@ plugins existants, quand ils ne sont pas simplement absents.
 | <img src="assets/icons/jeeterm.png" width="28"> | **JeeTerm** | Un vrai terminal dans Jeedom, comme celui de Home Assistant — ⚠️ seul plugin avec dépendances | `0.2` | [↗](https://github.com/replicatorbe/jeedom-plugin-jeeterm) |
 | <img src="assets/icons/dahua.png" width="28"> | **Dahua NVR** | Les événements de vos caméras Dahua, en temps réel, typés et archivés | `0.6` | [↗](https://github.com/replicatorbe/jeedom-plugin-dahua) |
 | <img src="assets/icons/dahuavtobe.png" width="28"> | **Dahua VTO** | On sonne, Jeedom le sait dans la seconde et garde le visage | `0.1` | [↗](https://github.com/replicatorbe/jeedom-plugin-dahuavtobe) |
-| <img src="assets/icons/presencium.png" width="28"> | **Presencium** | Qui est à la maison, pour de bon, et ce que la maison en fait | `1.2` β | [↗](https://github.com/replicatorbe/jeedom-plugin-presencium) |
+| <img src="assets/icons/presencium.png" width="28"> | **Presencium** | Qui est à la maison, pour de bon, et ce que la maison en fait | `1.2` | [↗](https://github.com/replicatorbe/jeedom-plugin-presencium) |
 | <img src="assets/icons/simulationpresenceintelligentbe.png" width="28"> | **Simulation de présence** | La maison rejoue vos vraies soirées pendant que vous êtes ailleurs | `1.0` | [↗](https://github.com/replicatorbe/jeedom-plugin-simulationpresenceintelligentbe) |
 | <img src="assets/icons/solplanetbe.png" width="28"> | **Solplanet** | Votre production solaire en local, sans le cloud du fabricant | `0.2` | [↗](https://github.com/replicatorbe/jeedom-plugin-solplanetbe) |
 | <img src="assets/icons/mqttbe.png" width="28"> | **MQTT BE** | Donnez l'adresse du broker, vos Shelly arrivent seuls | `0.7` | [↗](https://github.com/replicatorbe/jeedom-plugin-mqttbe) |
@@ -188,8 +188,7 @@ s'arme sur quelqu'un assis dans son salon.
 
 **Il faut** au moins une commande d'information qui dise la présence, publiée par
 un autre plugin : Presencium ne détecte rien lui-même, il stabilise et décide. Ni
-démon, ni dépendance, ni appel réseau. Publié pour l'instant sur la branche
-`beta`.
+démon, ni dépendance, ni appel réseau.
 📦 [`jeedom-plugin-presencium`](https://github.com/replicatorbe/jeedom-plugin-presencium)
 
 ### <img src="assets/icons/simulationpresenceintelligentbe.png" width="32" align="top"> Simulation de présence intelligente
