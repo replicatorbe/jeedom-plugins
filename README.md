@@ -2,13 +2,14 @@
 
 # 🏠 Plugins Jeedom — sMug
 
-**Treize plugins libres pour Jeedom, écrits en Belgique, sans dépendance à installer.**
+**Quinze plugins libres pour Jeedom, écrits en Belgique, sans dépendance à installer — à une exception près, JeeTerm.**
 
-Un dashboard, des caméras, un portier, du solaire, MQTT, la météo, les poubelles,
-les trains, un robot aspirateur, l'éclairage, les volets, la simulation de
-présence et un assistant vocal — chacun dans son dépôt, tous rassemblés ici.
+Un dashboard, une console, des caméras, un portier, la détection de présence,
+du solaire, MQTT, la météo, les poubelles, les trains, un robot aspirateur,
+l'éclairage, les volets, la simulation de présence et un assistant vocal —
+chacun dans son dépôt, tous rassemblés ici.
 
-[![Plugins](https://img.shields.io/badge/plugins-13-2f81f7?style=for-the-badge)](#-vue-densemble)
+[![Plugins](https://img.shields.io/badge/plugins-15-2f81f7?style=for-the-badge)](#-vue-densemble)
 [![Jeedom](https://img.shields.io/badge/Jeedom-4.4%2B-3ba55d?style=for-the-badge)](https://jeedom.com)
 [![PHP](https://img.shields.io/badge/PHP-natif-777bb4?style=for-the-badge&logo=php&logoColor=white)](#-un-socle-commun)
 [![Licence](https://img.shields.io/badge/licence-AGPL--3.0-e8710a?style=for-the-badge)](LICENSE)
@@ -26,8 +27,9 @@ Chaque plugin vit dans son propre dépôt, avec sa documentation, son changelog 
 ses tests. Vous trouverez ici de quoi savoir lequel vous intéresse, et pourquoi.
 
 Un fil conducteur : **résoudre un vrai problème de la maison sans écrire de
-scénario**, et ne rien demander de plus que Jeedom — pas de paquet à installer,
-pas de service tiers imposé, pas de cloud là où le réseau local suffit.
+scénario**, et ne rien demander de plus que Jeedom — pas de paquet à installer
+(JeeTerm mis à part, par nécessité), pas de service tiers imposé, pas de cloud là
+où le réseau local suffit.
 
 Et un second, revendiqué : **combler ce qui manque aux Belges dans Jeedom**.
 Trois plugins — [Météo Belgique IRM](#-la-belgique-au-quotidien),
@@ -42,8 +44,10 @@ plugins existants, quand ils ne sont pas simplement absents.
 | | Plugin | En une phrase | Stable | Dépôt |
 |:---:|:---|:---|:---:|:---:|
 | <img src="assets/icons/jeeglowbe.png" width="28"> | **jeeGlow** | Un second dashboard, moderne et tactile, sans toucher au premier | `0.1` | [↗](https://github.com/replicatorbe/jeedom-plugin-jeeglowbe) |
+| <img src="assets/icons/jeeterm.png" width="28"> | **JeeTerm** | Un vrai terminal dans Jeedom, comme celui de Home Assistant — ⚠️ seul plugin avec dépendances | `0.2` | [↗](https://github.com/replicatorbe/jeedom-plugin-jeeterm) |
 | <img src="assets/icons/dahua.png" width="28"> | **Dahua NVR** | Les événements de vos caméras Dahua, en temps réel, typés et archivés | `0.6` | [↗](https://github.com/replicatorbe/jeedom-plugin-dahua) |
 | <img src="assets/icons/dahuavtobe.png" width="28"> | **Dahua VTO** | On sonne, Jeedom le sait dans la seconde et garde le visage | `0.1` | [↗](https://github.com/replicatorbe/jeedom-plugin-dahuavtobe) |
+| <img src="assets/icons/presencium.png" width="28"> | **Presencium** | Qui est à la maison, pour de bon, et ce que la maison en fait | `1.2` β | [↗](https://github.com/replicatorbe/jeedom-plugin-presencium) |
 | <img src="assets/icons/simulationpresenceintelligentbe.png" width="28"> | **Simulation de présence** | La maison rejoue vos vraies soirées pendant que vous êtes ailleurs | `1.0` | [↗](https://github.com/replicatorbe/jeedom-plugin-simulationpresenceintelligentbe) |
 | <img src="assets/icons/solplanetbe.png" width="28"> | **Solplanet** | Votre production solaire en local, sans le cloud du fabricant | `0.2` | [↗](https://github.com/replicatorbe/jeedom-plugin-solplanetbe) |
 | <img src="assets/icons/mqttbe.png" width="28"> | **MQTT BE** | Donnez l'adresse du broker, vos Shelly arrivent seuls | `0.7` | [↗](https://github.com/replicatorbe/jeedom-plugin-mqttbe) |
@@ -57,7 +61,7 @@ plugins existants, quand ils ne sont pas simplement absents.
 
 ---
 
-## 🖥️ L'interface
+## 🖥️ L'interface et l'administration
 
 ### <img src="assets/icons/jeeglowbe.png" width="32" align="top"> jeeGlow
 
@@ -80,6 +84,39 @@ vos commandes. Il est pensé pour l'écran mural autant que pour le téléphone.
 **Il ne faut rien** : ni démon, ni dépendance, ni configuration. Le plugin ne
 crée aucun équipement et ne modifie rien — il lit.
 📦 [`jeedom-plugin-jeeglowbe`](https://github.com/replicatorbe/jeedom-plugin-jeeglowbe)
+
+### <img src="assets/icons/jeeterm.png" width="32" align="top"> JeeTerm
+
+> *Un vrai terminal dans Jeedom, comme le Terminal de Home Assistant.*
+
+Certaines choses se font plus vite en trois mots dans une console qu'en dix
+clics : suivre un journal, relancer un service, regarder l'espace disque, éditer
+un fichier. JeeTerm ouvre un **vrai shell** de la machine Jeedom dans le
+navigateur — couleurs, raccourcis clavier, `nano`, `vim`, `htop` — relié par un
+WebSocket qui passe par l'Apache de Jeedom : rien de plus à ouvrir sur le réseau,
+et ça marche en HTTPS comme en HTTP.
+
+- Terminal complet (xterm.js) : recherche, liens cliquables, plein écran, copier-coller même en `http://`, touches spéciales pour tablette et téléphone
+- Neuf thèmes, dont **Noir** et **Phosphore vert**, et un effet **écran cathodique** rétro
+- Commandes rapides personnalisables, tapées sans être validées : c'est vous qui appuyez sur Entrée
+- Bannière d'accueil façon neofetch et raccourcis Jeedom : `jlog`, `jcd`, `jerr`, `jplugins`…
+- Session **tmux** persistante en option, compte du shell au choix (`www-data`, `root`…)
+- Réservé aux administrateurs, jeton à usage unique de 30 secondes, audit de chaque session, fermeture après inactivité — sans jamais couper une commande qui travaille
+
+> ⚠️ **L'exception de la collection : ce plugin a des dépendances.** Un
+> terminal ne peut pas vivre dans une requête PHP : il lui faut un démon qui
+> tient le pseudo-terminal ouvert, et un relais WebSocket dans Apache. Son
+> installation des dépendances ajoute donc `python3` et `tmux` s'ils manquent,
+> active les modules Apache `proxy` et `proxy_wstunnel`, et écrit
+> `/etc/apache2/conf-available/jeeterm.conf` — configuration vérifiée avant
+> chaque rechargement d'Apache et retirée à la désactivation du plugin. Le
+> démon, lui, est en **Python avec la seule bibliothèque standard** : aucun
+> `pip`, aucun environnement virtuel.
+
+**Il faut** l'Apache de Jeedom (organisation Debian) et un profil administrateur.
+Ce terminal donne un accès root à la machine : `www-data` a `sudo` sans mot de
+passe sur Jeedom.
+📦 [`jeedom-plugin-jeeterm`](https://github.com/replicatorbe/jeedom-plugin-jeeterm)
 
 ---
 
@@ -128,6 +165,32 @@ scénario ait eu le temps de se réveiller.
 **Il faut** un portier Dahua VTO joignable en local (ports 80 et 5000).
 Mis au point sur un DHI-VTO2211G-WP.
 📦 [`jeedom-plugin-dahuavtobe`](https://github.com/replicatorbe/jeedom-plugin-dahuavtobe)
+
+### <img src="assets/icons/presencium.png" width="32" align="top"> Presencium
+
+> *Savoir qui est à la maison, pour de bon, et agir dessus — sans scénario.*
+
+Une balise Bluetooth qui hoquette annonce des départs qui n'en sont pas : suivie
+ici, l'une d'elles a déclaré cinq absences en une heure alors que personne
+n'était sorti. Presencium prend n'importe quelle commande de présence — balise
+remontée par MQTT, détecteur de mouvement, téléphone vu sur le réseau — et en
+fait une **présence confirmée** : l'arrivée sans délai, le départ après quinze
+minutes de silence. L'asymétrie est le cœur du plugin : une arrivée manquée,
+c'est une porte qui ne s'ouvre pas ; un départ inventé, c'est une alarme qui
+s'arme sur quelqu'un assis dans son salon.
+
+- Personnes et **foyers** : quelqu'un est là, tout le monde est là, combien, qui, depuis quand la maison est vide, qui est arrivé le premier
+- Rien de mémorisé : la présence est recalculée à partir du signal, un redémarrage ne fabrique jamais de faux départ
+- Les états « en service » et « armée » que l'alarme du cœur n'a plus depuis la v4, avec ses types génériques
+- **Règles qui se lisent comme une phrase** : quand le dernier part, si l'alarme est en service, après cinq minutes, armer — sept déclencheurs, plage horaire, jours, conditions sur n'importe quelle commande
+- Une attente qui s'annule : partir, revenir chercher ses clés et repartir n'arme rien
+- **Mode simulation** à trois niveaux (plugin, foyer, règle) et un journal par foyer qui explique chaque verdict, rebonds absorbés compris
+
+**Il faut** au moins une commande d'information qui dise la présence, publiée par
+un autre plugin : Presencium ne détecte rien lui-même, il stabilise et décide. Ni
+démon, ni dépendance, ni appel réseau. Publié pour l'instant sur la branche
+`beta`.
+📦 [`jeedom-plugin-presencium`](https://github.com/replicatorbe/jeedom-plugin-presencium)
 
 ### <img src="assets/icons/simulationpresenceintelligentbe.png" width="32" align="top"> Simulation de présence intelligente
 
@@ -394,6 +457,12 @@ Puis **Activer** le plugin, et créer un équipement. Aucun paquet système, auc
 dépendance à installer : les plugins qui ont besoin d'une bibliothèque
 l'embarquent.
 
+**Une exception : JeeTerm.** Après l'avoir activé, lancez l'installation des
+**dépendances** depuis sa page de configuration : c'est elle qui prépare le
+relais WebSocket d'Apache (voir [sa documentation](https://github.com/replicatorbe/jeedom-plugin-jeeterm/blob/master/docs/fr_FR/index.md#installation)). Il n'a pas
+d'équipement à créer : le terminal s'ouvre depuis *Plugins → Programmation →
+JeeTerm*.
+
 Chaque version publiée est **taguée** dans le dépôt du plugin (`v0.6`, `v1.1`…) :
 l'onglet *Tags* donne le code exact d'une version, à confronter à la ligne
 correspondante du changelog. La branche `beta` porte la version en préparation,
@@ -403,11 +472,11 @@ qui peut être en avance d'un numéro sur `master`.
 
 ## 🧱 Un socle commun
 
-Les treize plugins partagent les mêmes partis pris :
+Les quinze plugins partagent les mêmes partis pris — JeeTerm s'écartant du premier, par nécessité :
 
 | | |
 |:---|:---|
-| **PHP natif** | Aucune dépendance à installer : ni `pip`, ni `composer`, ni paquet système. Les trois plugins à démon (Dahua NVR, Dahua VTO, MQTT BE) ont un démon écrit **en PHP**. |
+| **PHP natif** | Aucune dépendance à installer : ni `pip`, ni `composer`, ni paquet système. Dahua NVR, Dahua VTO et MQTT BE ont un démon écrit **en PHP**. **Seule exception : JeeTerm**, dont le démon est en Python (bibliothèque standard seule) et dont l'installation des dépendances configure le relais WebSocket d'Apache. |
 | **Démon isolé du cœur** | Les démons ne chargent jamais `core.inc.php` : ils dialoguent avec Jeedom par HTTP authentifié. Une mise à jour du cœur ne peut pas les casser. |
 | **Le local d'abord** | Solplanet, Dahua et MQTT ne sortent pas du réseau. Le cloud n'est utilisé que là où le constructeur ne laisse pas le choix. |
 | **Sobriété réseau** | Cache, recul exponentiel après échec, fenêtres de surveillance : les services publics gratuits ne sont pas matraqués. |
@@ -435,7 +504,7 @@ recevront votre version.
 [github.com/replicatorbe](https://github.com/replicatorbe) · [fafchamps.be](https://fafchamps.be)
 
 <sub>Les plugins sont des travaux indépendants, sans lien avec Jeedom SAS,
-Dahua, Solplanet, Dreame, la SNCB/NMBS, l'IRM/KMI ou Fost Plus. Les marques
+Dahua, Solplanet, Dreame, la SNCB/NMBS, l'IRM/KMI, Fost Plus ou Home Assistant. Les marques
 citées appartiennent à leurs propriétaires.</sub>
 
 </div>
