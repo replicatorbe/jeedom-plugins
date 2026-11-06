@@ -2,14 +2,14 @@
 
 # 🏠 Plugins Jeedom — sMug
 
-**Trente-trois plugins libres pour Jeedom, écrits en Belgique. Trente n'installent rien ; les trois autres disent pourquoi.**
+**Trente-quatre plugins libres pour Jeedom, écrits en Belgique. Trente et un n'installent rien ; les trois autres disent pourquoi.**
 
 Un second dashboard, une console, des écrans muraux, la TV, des caméras, un
-portier, une alarme, la présence, le solaire, le compteur, le chauffage, MQTT,
+portier, une alarme, la présence, le solaire, le compteur, le boiler, le chauffage, MQTT,
 ESPHome, Matter, la météo, les poubelles, les trains, les pannes de courant et
 d'eau — chacun dans son dépôt, tous rassemblés ici.
 
-[![Plugins](https://img.shields.io/badge/plugins-33-2f81f7?style=for-the-badge)](#-vue-densemble)
+[![Plugins](https://img.shields.io/badge/plugins-34-2f81f7?style=for-the-badge)](#-vue-densemble)
 [![Jeedom](https://img.shields.io/badge/Jeedom-4.4%2B-3ba55d?style=for-the-badge)](https://jeedom.com)
 [![PHP](https://img.shields.io/badge/PHP-natif-777bb4?style=for-the-badge&logo=php&logoColor=white)](#-un-socle-commun)
 [![Licence](https://img.shields.io/badge/licence-AGPL--3.0-e8710a?style=for-the-badge)](LICENSE)
@@ -64,6 +64,7 @@ alors depuis la branche `beta`.
 | <img src="assets/icons/alertebe.png" width="28"> | **Alertes BE** | Le frigo à 10 °C, de l'eau par terre : prévenu, sans un scénario par capteur | `0.4 β` | [↗](https://github.com/replicatorbe/jeedom-plugin-alertebe) |
 | <img src="assets/icons/solplanetbe.png" width="28"> | **Solplanet** | Votre production solaire en local, sans le cloud du fabricant | `0.2` | [↗](https://github.com/replicatorbe/jeedom-plugin-solplanetbe) |
 | <img src="assets/icons/homewizardbe.png" width="28"> | **HomeWizard** | Le compteur P1 et le tarif capacitaire, relevés en local | `0.1` | [↗](https://github.com/replicatorbe/jeedom-plugin-homewizardbe) |
+| <img src="assets/icons/routeursolairebe.png" width="28"> | **Routeur Solaire BE** | Le boiler chauffe au soleil qu'on injectait, l'eau chaude reste garantie | `0.1 β` | [↗](https://github.com/replicatorbe/jeedom-plugin-routeursolairebe) |
 | <img src="assets/icons/thermostatbe.png" width="28"> | **Thermostat BE** | Chaudière et clim réversible qui ne se battent plus | `0.5 β` | [↗](https://github.com/replicatorbe/jeedom-plugin-thermostatbe) |
 | <img src="assets/icons/airtonbe.png" width="28"> | **Airton** | La clim Airton en local, sans le cloud Tuya | `0.3.0` | [↗](https://github.com/replicatorbe/jeedom-plugin-airtonbe) |
 | <img src="assets/icons/mqttbe.png" width="28"> | **MQTT BE** | Donnez l'adresse du broker, vos Shelly et vos balises arrivent seuls | `0.7` | [↗](https://github.com/replicatorbe/jeedom-plugin-mqttbe) |
@@ -482,6 +483,28 @@ ouvert chez le gestionnaire de réseau. Démon PHP, aucune dépendance, aucun ap
 hors du réseau local.
 📦 [`jeedom-plugin-homewizardbe`](https://github.com/replicatorbe/jeedom-plugin-homewizardbe)
 
+### <img src="assets/icons/routeursolairebe.png" width="32" align="top"> Routeur Solaire BE
+
+> *Le boiler chauffe au soleil qu'on injectait, et l'eau chaude reste garantie.*
+
+Le soleil de midi part sur le réseau pour quelques centimes, le boiler chauffe
+la nuit au prix plein. Le routeur inverse les choses : il écoute le compteur à
+chaque mesure et allume le boiler, par un simple relais, quand le surplus
+couvre presque toute sa résistance. Un **seau de prélèvement** absorbe les
+nuages passagers ; ce que le soleil n'a pas chauffé est **rattrapé en fin de
+nuit**, en heures creuses.
+
+- Surplus compté boiler compris, pour ne pas l'éteindre aussitôt allumé
+- Durées minimales de marche et d'arrêt, coupure sur prélèvement fort
+- Boiler plein deviné sans sonde, chauffe complète anti-légionelle chaque semaine
+- Mode simulation : un boiler virtuel, avec ses douches et ses pertes, avant d'avoir le vrai
+- Traces CSV minute par minute, et un outil qui les rejoue avec d'autres réglages
+
+**Il faut** la puissance au compteur (un P1, par exemple par le plugin
+HomeWizard) ; plus tard, un contacteur piloté par un relais domotique.
+Ni démon, ni dépendance, ni appel réseau.
+📦 [`jeedom-plugin-routeursolairebe`](https://github.com/replicatorbe/jeedom-plugin-routeursolairebe)
+
 ### <img src="assets/icons/thermostatbe.png" width="32" align="top"> Thermostat BE
 
 > *Une chaudière et une clim réversible qui ne se battent plus.*
@@ -884,7 +907,7 @@ Puis **Activer** le plugin, et créer un équipement. Les plugins marqués **β*
 dans le tableau n'ont pas encore de version stable : installez-les depuis la
 branche `beta`.
 
-Pour trente plugins sur trente-trois, c'est tout : aucun paquet système, aucune
+Pour trente et un plugins sur trente-quatre, c'est tout : aucun paquet système, aucune
 dépendance — ceux qui ont besoin d'une bibliothèque l'embarquent. Pour **JeeTerm**,
 **ESPHome** et **Matter Hub**, lancez en plus l'installation des **dépendances**
 depuis la page de configuration du plugin, avant de démarrer le démon.
@@ -897,7 +920,7 @@ du plugin (`v0.6`, `v1.2`…), l'onglet *Tags* en donne le code exact.
 
 ## 🧱 Un socle commun
 
-Les trente-trois plugins partagent les mêmes partis pris, et trois s'écartent
+Les trente-quatre plugins partagent les mêmes partis pris, et trois s'écartent
 du premier quand ils n'ont pas le choix :
 
 | | |
@@ -906,7 +929,7 @@ du premier quand ils n'ont pas le choix :
 | **Démon isolé du cœur** | Les démons ne chargent jamais `core.inc.php` : ils dialoguent avec Jeedom par HTTP authentifié. Une mise à jour du cœur ne peut pas les casser. |
 | **Le local d'abord** | Caméras, portier, alarme, onduleur, compteur, clim, TV, Sonos, LED, imprimante, MQTT, ESPHome, Matter : tout passe par le réseau local. Le cloud n'est utilisé que là où le constructeur ne laisse pas le choix (Dreame), ou quand on le choisit : K2000 et la synthèse vocale OpenAI de Sonos, l'analyse d'image en option des deux plugins Dahua. |
 | **Sobriété réseau** | Cache, recul après échec, fenêtres de surveillance : les services publics gratuits — IRM, Recycle!, iRail, ORES, SWDE — ne sont pas matraqués. |
-| **Tests hors ligne** | La logique métier est séparée de Jeedom et vérifiée par des jeux d'essai qui tournent sans box, sans base et sans matériel — dans trente et un dépôts sur trente-trois. ORES et SWDE n'en ont pas encore. |
+| **Tests hors ligne** | La logique métier est séparée de Jeedom et vérifiée par des jeux d'essai qui tournent sans box, sans base et sans matériel — dans trente-deux dépôts sur trente-quatre. ORES et SWDE n'en ont pas encore. |
 | **Documentation en français** | Chaque dépôt porte sa doc `docs/fr_FR/` et son changelog, consultables depuis Jeedom ; la plupart ont aussi leur version anglaise. |
 | **Rien n'est effacé en cas de panne** | Une source indisponible laisse la dernière valeur connue en place — le plugin ne ment pas par zéro. |
 
