@@ -79,8 +79,8 @@ alors depuis la branche `beta`.
 | <img src="assets/icons/meteobelgiqueirm.png" width="28"> | 🇧🇪 **Météo Belgique IRM** | La météo officielle belge, sans compte ni clé | `0.2` | [↗](https://github.com/replicatorbe/jeedom-plugin-meteobelgiqueirm) |
 | <img src="assets/icons/hygeabe.png" width="28"> | 🇧🇪 **Hygea** | Le calendrier des poubelles, avec le rappel la veille au soir | `0.6` | [↗](https://github.com/replicatorbe/jeedom-plugin-hygeabe) |
 | <img src="assets/icons/sncbnmbs.png" width="28"> | 🇧🇪 **SNCB/NMBS** | Est-ce que je pars maintenant, et sur quelle voie ? | `1.2` | [↗](https://github.com/replicatorbe/jeedom-plugin-sncbnmbs) |
-| ⚡ | 🇧🇪 **ORES** | Une panne de courant à votre adresse, signalée avant que vous alliez voir la carte | `0.1` | [↗](https://github.com/replicatorbe/jeedom-plugin-oresbe) |
-| 💧 | 🇧🇪 **SWDE** | Coupure d'eau ou eau colorée annoncée dans votre commune | `0.2` | [↗](https://github.com/replicatorbe/jeedom-plugin-swdebe) |
+| <img src="assets/icons/oresbe.png" width="28"> | 🇧🇪 **ORES** | Une panne de courant à votre adresse, signalée avant que vous alliez voir la carte | `0.1` | [↗](https://github.com/replicatorbe/jeedom-plugin-oresbe) |
+| <img src="assets/icons/swdebe.png" width="28"> | 🇧🇪 **SWDE** | Coupure d'eau ou eau colorée annoncée dans votre commune | `0.2` | [↗](https://github.com/replicatorbe/jeedom-plugin-swdebe) |
 
 ---
 
