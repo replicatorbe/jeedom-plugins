@@ -496,7 +496,7 @@ nuit**, en heures creuses.
 
 - Surplus compté boiler compris, pour ne pas l'éteindre aussitôt allumé
 - Durées minimales de marche et d'arrêt, coupure sur prélèvement fort
-- Boiler plein deviné sans sonde, chauffe complète anti-légionelle chaque semaine
+- Boiler plein deviné sans sonde, chauffe complète dès 2 jours sans boiler plein
 - Mode simulation : un boiler virtuel, avec ses douches et ses pertes, avant d'avoir le vrai
 - Traces CSV minute par minute, et un outil qui les rejoue avec d'autres réglages
 
